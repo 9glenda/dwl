@@ -1,4 +1,4 @@
-# dwl - dwm for Wayland
+# dwl - personal fork
 
 Join us on our [Discord server] or at [#dwl] on irc.libera.chat.
 
