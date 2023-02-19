@@ -1,0 +1,22 @@
+--- dwl.c
++++ dwl.c
+@@ -1498,6 +1566,19 @@ mapnotify(struct wl_listener *listener, void *data)
+ 		setfullscreen(c, 1);
+ 
+ 	c->mon->un_map = 1;
++	if (!c->noswallow) {
++			Client *p = termforwin(c);
++			if (p) {
++					c->swallowedby = p;
++					p->swallowing  = c;
++					wl_list_remove(&c->link);
++					wl_list_remove(&c->flink);
++					swallow(c,p);
++					wl_list_remove(&p->link);
++					wl_list_remove(&p->flink);
++			}
++			arrange(c->mon);
++	}
+ }
+ 
+ void
